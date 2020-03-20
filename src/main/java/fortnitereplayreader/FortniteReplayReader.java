@@ -44,9 +44,11 @@ public class FortniteReplayReader {
         int magicNumber = (int) reader.readUInt32();
         int fileVersion = reader.readInt32();
 
+        /*
         if(magicNumber != 0x1CA2E27F || fileVersion != 5) {
             throw new Exception("This is a invalid Fortnite replay file!");
         }
+         */
 
         int lengthInMs = reader.readInt32();
         int networkVersion = reader.readInt32();
