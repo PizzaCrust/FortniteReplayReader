@@ -40,6 +40,12 @@ public class FortniteReplayReader {
         parseChunks();
     }
 
+    public FortniteReplayReader(InputStream stream) throws Exception {
+        this.reader = new BinaryReader(stream);
+        parseMeta();
+        parseChunks();
+    }
+
     protected void parseMeta() throws Exception {
         int magicNumber = (int) reader.readUInt32();
         int fileVersion = reader.readInt32();
