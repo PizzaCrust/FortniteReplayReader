@@ -14,6 +14,7 @@ import java.util.UUID;
  * This is inspired an was made with the help of https://github.com/fredimachado/FortniteReplayReader by Fredi Machado.
  * @author EweLoHD
  */
+@Deprecated
 public class FortniteReplayReader {
 
     private File replayFile;

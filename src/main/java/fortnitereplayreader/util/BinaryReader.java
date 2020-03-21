@@ -54,6 +54,10 @@ public class BinaryReader extends FilterInputStream {
         return ByteBuffer.wrap(this.readBytes(4)).order(ByteOrder.LITTLE_ENDIAN).getInt();
     }
 
+    public boolean readUInt32AsBoolean() throws IOException {
+        return readUInt32() != 0;
+    }
+
 
     /**
      * Reads a 4-byte unsigned integer from the current stream and advances the position of the stream by four bytes. Returns a long as java does not have the means to have unsigned values.

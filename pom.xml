@@ -22,4 +22,20 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>bintray-fungamesleaks-mavenRepo</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/fungamesleaks/mavenRepo</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>me.fungames</groupId>
+            <artifactId>JOodle</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
 </project>
