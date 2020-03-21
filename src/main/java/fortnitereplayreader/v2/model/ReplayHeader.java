@@ -11,7 +11,7 @@ public class ReplayHeader {
     public long engineNetworkVersion;
     public long gameNetworkProtocolVersion;
 
-    public UUID id;
+    public String id;
 
     public int major;
     public int minor;

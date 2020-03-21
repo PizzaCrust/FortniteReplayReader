@@ -85,7 +85,7 @@ public abstract class UReplayReader {
         header.engineNetworkVersion = reader.readUInt32();
         header.gameNetworkProtocolVersion = reader.readUInt32();
         if (header.networkVersion >= NetworkVersionHistory.HISTORY_HEADER_GUID) {
-            header.id = reader.readUUID();
+            header.id = reader.readGUID();
         }
         if (header.networkVersion >= NetworkVersionHistory.HISTORY_SAVE_FULL_ENGINE_VERSION) {
             header.major = reader.readUInt16();
@@ -107,7 +107,7 @@ public abstract class UReplayReader {
         replay.header = header;
     }
 
-    protected abstract void readEvent(ReplayEvent.Info event);
+    protected abstract void readEvent(ReplayEvent.Info event) throws Exception;
 
     private void parseEventInfo() throws Exception {
         ReplayEvent.Info info = new ReplayEvent.Info();
@@ -137,6 +137,6 @@ public abstract class UReplayReader {
             memorySizeInBytes = reader.readInt32();
         }
         //TODO
-        byte[] decompressed = decompress(decrypt((int) length), memorySizeInBytes);
+        //byte[] decompressed = decompress(decrypt((int) length), memorySizeInBytes);
     }
 }

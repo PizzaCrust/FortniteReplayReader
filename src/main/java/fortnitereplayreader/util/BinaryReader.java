@@ -184,8 +184,21 @@ public class BinaryReader extends FilterInputStream {
         return value.trim().replaceAll("\0", "");
     }
 
+    @Deprecated
     public UUID readUUID() throws Exception {
         return UUID.nameUUIDFromBytes(this.readBytes(16));
+    }
+
+    public String readGUID(int size) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        for (byte b : this.readBytes(size)) {
+            sb.append(String.format("%02x", b));
+        }
+        return sb.toString();
+    }
+
+    public String readGUID() throws Exception {
+        return readGUID(16);
     }
 
     @Override
