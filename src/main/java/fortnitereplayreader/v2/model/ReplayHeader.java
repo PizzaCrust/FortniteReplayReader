@@ -21,5 +21,20 @@ public class ReplayHeader {
 
     public long flags;
 
-
+    @Override
+    public String toString() {
+        return "ReplayHeader{" +
+                "networkVersion=" + networkVersion +
+                ", networkChecksum=" + networkChecksum +
+                ", engineNetworkVersion=" + engineNetworkVersion +
+                ", gameNetworkProtocolVersion=" + gameNetworkProtocolVersion +
+                ", id=" + id +
+                ", major=" + major +
+                ", minor=" + minor +
+                ", patch=" + patch +
+                ", changelist=" + changelist +
+                ", branch='" + branch + '\'' +
+                ", flags=" + flags +
+                '}';
+    }
 }

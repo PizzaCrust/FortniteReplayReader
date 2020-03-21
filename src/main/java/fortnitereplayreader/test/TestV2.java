@@ -22,6 +22,7 @@ public class TestV2 {
                 ".replay")));
         reader.readReplay();
         System.out.println(reader.replay.meta);
+        System.out.println(reader.replay.header);
         /*
         FortniteReplayReader reader2 = new FortniteReplayReader(new FileInputStream(new File(
                 "replay3.replay")));
