@@ -3,6 +3,7 @@ package fortnitereplayreader.v2;
 import java.io.InputStream;
 
 import fortnitereplayreader.util.BinaryReader;
+import fortnitereplayreader.v2.model.ReplayEvent;
 import fortnitereplayreader.v2.model.ReplayHeader;
 import fortnitereplayreader.v2.model.ReplayMeta;
 import fortnitereplayreader.v2.model.UReplay;
@@ -12,8 +13,8 @@ import fortnitereplayreader.v2.model.enums.ReplayVersionHistory;
 
 public abstract class UReplayReader {
 
-    private BinaryReader reader;
-    public UReplay replay = new UReplay();
+    protected final BinaryReader reader;
+    public final UReplay replay = new UReplay();
 
     public UReplayReader(InputStream stream) {
         this.reader = new BinaryReader(stream);
@@ -60,7 +61,7 @@ public abstract class UReplayReader {
             long offset = reader.getPosition();
             //Checkpoint ignored
             if (chunkType == ReplayChunkType.Event) {
-                //TODO
+                parseEventInfo();
             } else if (chunkType == ReplayChunkType.ReplayData) {
                 //TODO
             } else if (chunkType == ReplayChunkType.Header) {
@@ -103,5 +104,18 @@ public abstract class UReplayReader {
             header.flags = reader.readUInt32();
         }
         replay.header = header;
+    }
+
+    protected abstract void readEvent(ReplayEvent.Info event);
+
+    private void parseEventInfo() throws Exception {
+        ReplayEvent.Info info = new ReplayEvent.Info();
+        info.id = reader.readFString();
+        info.group = reader.readFString();
+        info.metadata = reader.readFString();
+        info.startTime = reader.readUInt32();
+        info.endTime = reader.readUInt32();
+        info.sizeInBytes = reader.readInt32();
+        readEvent(info);
     }
 }

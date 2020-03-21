@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import fortnitereplayreader.FortniteReplayReader;
 import fortnitereplayreader.v2.UReplayReader;
+import fortnitereplayreader.v2.model.ReplayEvent;
 
 public class TestV2 {
 
@@ -13,6 +14,11 @@ public class TestV2 {
 
         public TestUReplayReader(InputStream stream) {
             super(stream);
+        }
+
+        @Override
+        protected void readEvent(ReplayEvent.Info event) {
+            System.out.println(event);
         }
 
     }
