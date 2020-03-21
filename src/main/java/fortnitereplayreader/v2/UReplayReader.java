@@ -10,6 +10,7 @@ import fortnitereplayreader.v2.model.UReplay;
 import fortnitereplayreader.v2.model.enums.NetworkVersionHistory;
 import fortnitereplayreader.v2.model.enums.ReplayChunkType;
 import fortnitereplayreader.v2.model.enums.ReplayVersionHistory;
+import me.fungames.oodle.Oodle;
 
 public abstract class UReplayReader {
 
@@ -63,7 +64,7 @@ public abstract class UReplayReader {
             if (chunkType == ReplayChunkType.Event) {
                 parseEventInfo();
             } else if (chunkType == ReplayChunkType.ReplayData) {
-                //TODO
+                parseReplayData();
             } else if (chunkType == ReplayChunkType.Header) {
                 parseHeaders();
             }
@@ -117,5 +118,25 @@ public abstract class UReplayReader {
         info.endTime = reader.readUInt32();
         info.sizeInBytes = reader.readInt32();
         readEvent(info);
+    }
+
+    protected abstract byte[] decrypt(int size) throws Exception;
+
+    protected byte[] decompress(byte[] bytes, int size) throws Exception {
+        return Oodle.INSTANCE.decompress(bytes, size);
+    }
+
+    private void parseReplayData() throws Exception {
+        if (replay.meta.fileVersion >= ReplayVersionHistory.HISTORY_STREAM_CHUNK_TIMES) {
+            long start = reader.readUInt32();
+            long end = reader.readUInt32();
+        }
+        long length = reader.readUInt32();
+        int memorySizeInBytes = (int) length;
+        if (replay.meta.fileVersion >= ReplayVersionHistory.HISTORY_ENCRYPTION) {
+            memorySizeInBytes = reader.readInt32();
+        }
+        //TODO
+        byte[] decompressed = decompress(decrypt((int) length), memorySizeInBytes);
     }
 }
